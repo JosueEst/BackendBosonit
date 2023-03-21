@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String[] args) throws IOException, Exception {
 
-        Path path = Paths.get("./people.txt");
+        Path path = Paths.get("block1-process-file-and-streams/people.txt");
         List<String> listString = new ArrayList<>();
         List<Person> finalList = new ArrayList<>();
         listString = list(path);
