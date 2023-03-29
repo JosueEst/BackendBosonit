@@ -1,0 +1,18 @@
+2023-03-29 12:23:31,284 INFO org.springframework.boot.StartupInfoLogger [main] Starting Block5LoggingApplication using Java 17.0.6 on L2202076 with PID 17280 (C:\FormacionBosonit\Java Spring Boot\Ejercicios\BackendBosonit\block5-logging\target\classes started by josue.esteban in C:\FormacionBosonit\Java Spring Boot\Ejercicios\BackendBosonit\block5-logging)
+2023-03-29 12:23:31,289 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2023-03-29 12:23:31,866 INFO org.springframework.boot.StartupInfoLogger [main] Started Block5LoggingApplication in 1.051 seconds (JVM running for 1.356)
+2023-03-29 12:23:31,870 INFO com.bosonit.formacion.block5logging.Block5LoggingApplication [main] Mensaje a nivel de INFO
+2023-03-29 12:23:31,870 WARN com.bosonit.formacion.block5logging.Block5LoggingApplication [main] Mensaje a nivel de WARNING
+2023-03-29 12:23:31,871 ERROR com.bosonit.formacion.block5logging.Block5LoggingApplication [main] Mensaje a nivel de ERROR
+2023-03-29 12:28:50,340 INFO org.springframework.boot.StartupInfoLogger [main] Starting Block5LoggingApplication using Java 17.0.6 on L2202076 with PID 4140 (C:\FormacionBosonit\Java Spring Boot\Ejercicios\BackendBosonit\block5-logging\target\classes started by josue.esteban in C:\FormacionBosonit\Java Spring Boot\Ejercicios\BackendBosonit\block5-logging)
+2023-03-29 12:28:50,343 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2023-03-29 12:28:51,032 INFO org.springframework.boot.StartupInfoLogger [main] Started Block5LoggingApplication in 1.159 seconds (JVM running for 3.096)
+2023-03-29 12:28:51,037 INFO com.bosonit.formacion.block5logging.Block5LoggingApplication [main] Mensaje a nivel de INFO
+2023-03-29 12:28:51,038 WARN com.bosonit.formacion.block5logging.Block5LoggingApplication [main] Mensaje a nivel de WARNING
+2023-03-29 12:28:51,038 ERROR com.bosonit.formacion.block5logging.Block5LoggingApplication [main] Mensaje a nivel de ERROR
+2023-03-29 17:55:46,965 INFO org.springframework.boot.StartupInfoLogger [main] Starting Block5LoggingApplication using Java 17.0.6 on L2202076 with PID 14536 (C:\FormacionBosonit\Java Spring Boot\Ejercicios\BackendBosonit\block5-logging\target\classes started by josue.esteban in C:\FormacionBosonit\Java Spring Boot\Ejercicios\BackendBosonit\block5-logging)
+2023-03-29 17:55:46,967 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2023-03-29 17:55:47,342 INFO org.springframework.boot.StartupInfoLogger [main] Started Block5LoggingApplication in 0.689 seconds (JVM running for 1.915)
+2023-03-29 17:55:47,344 INFO com.bosonit.formacion.block5logging.Block5LoggingApplication [main] Mensaje a nivel de INFO
+2023-03-29 17:55:47,345 WARN com.bosonit.formacion.block5logging.Block5LoggingApplication [main] Mensaje a nivel de WARNING
+2023-03-29 17:55:47,345 ERROR com.bosonit.formacion.block5logging.Block5LoggingApplication [main] Mensaje a nivel de ERROR
