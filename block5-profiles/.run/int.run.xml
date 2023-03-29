@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="int" type="Application" factoryName="Application">
+    <envs>
+      <env name="spring.profiles.active" value="int" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.bosonit.formacion.block5profiles.Block5ProfilesApplication" />
+    <module name="block5-profiles" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
