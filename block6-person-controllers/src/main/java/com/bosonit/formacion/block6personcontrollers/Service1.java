@@ -5,15 +5,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Data
 public class Service1 {
 
-    Person p ;
+    Person person  = new Person();
+    City city = new City();
+    List<City> cityList =  new ArrayList<>();
 
-    @Bean
     public Person returnPerson(){
-        p = new Person();
-        return p;
+
+        return person;
+    }
+
+    public City returnCity(){
+
+        return  city;
+    }
+
+    public List<City> returnCityList(){
+        return  cityList;
     }
 }

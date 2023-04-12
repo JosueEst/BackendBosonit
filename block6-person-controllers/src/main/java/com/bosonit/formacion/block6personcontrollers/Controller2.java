@@ -7,40 +7,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping (value="/controller2")
 public class Controller2 {
-    // 1
     @Autowired
-    @Qualifier ("addPersona")
-    ResponseEntity<Person> aP ;
-
-    // 2
-    /*@Autowired
-    @Qualifier ("addPersona")
-    Person p;*/
+    Service1 service1;
 
 
+    //GET method to change body's data from de Person object that is sent by addPerson()
     @GetMapping (value = "/getPersona")
     public Person getPersona (){
-        Person p;
-         if(aP.hasBody() ){
-            p =  aP.getBody();
-            p.setAge(String.valueOf(Integer.parseInt(p.getAge())*2));
-        }else{
-             p = new Person();
-        }
-        return p;
+        service1.person.setAge(String.valueOf(Integer.parseInt(service1.person.getAge())*2));
+
+        return service1.person;
     }
+    @GetMapping (value = "/getCiudades")
+    public List<City> getCiudades (){
 
-    // 2
-    /*@GetMapping (value = "/getPersona")
-    public Person  getPersona (){
-
-        p.setAge(String.valueOf(Integer.parseInt(p.getAge())*2));
-
-        return p;
-    }*/
+        return service1.cityList;
+    }
 
 }

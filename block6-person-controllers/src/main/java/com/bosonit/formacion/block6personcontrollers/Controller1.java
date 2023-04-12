@@ -8,26 +8,22 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping (value = "/controller1")
 @Data
 public class Controller1 {
-    @Autowired
-    @Qualifier ("returnPerson")
-    Person person;//Referencia al @Bean de la clase @Service
 
-    /*@GetMapping (value = "/addPersona")
-    @Bean
-    public Person addPersona (@RequestHeader Map <String, String> cabeceras){
-        person.setName(cabeceras.get("name"));
-        person.setLocation(cabeceras.get("location"));
-        person.setAge(cabeceras.get("age"));
-        return person;
-    }*/
 
-    @Bean
+   @Autowired
+   Service1 service1;
+
+
+    //Method to set headers and body of a ResponseEntity object. Then return it;
+
     @GetMapping (value = "/addPersona")
     public ResponseEntity<Person> addPersona (@RequestParam Map<String,String> params){
 
@@ -35,12 +31,24 @@ public class Controller1 {
         headers.add("name",params.get("name"));
         headers.add("location",params.get("location"));
         headers.add("location",params.get("age"));
-        person.setName(params.get("name"));
-        person.setLocation(params.get("location"));
-        person.setAge(params.get("age"));
 
-        return new ResponseEntity<>(person, headers, HttpStatus.OK);
+        service1.person.setName(params.get("name"));
+        service1.person.setLocation(params.get("location"));
+        service1.person.setAge(params.get("age"));
+
+        return new ResponseEntity<>(service1.person, headers, HttpStatus.OK);
     }
 
+    //Method to add a City object type to a City's list
 
+    @PostMapping (value = "/addCiudad")
+    public List<City> addCiudad (@RequestParam String name, @RequestParam int nHab){
+
+        service1.cityList.add(new City (name,nHab));
+        return service1.returnCityList();
+    }
+    @GetMapping (value = "/bean/{bean1}")
+    public void returnBean (@PathVariable Person p){
+
+    }
 }
