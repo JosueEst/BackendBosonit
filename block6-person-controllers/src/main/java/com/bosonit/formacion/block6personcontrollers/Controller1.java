@@ -21,6 +21,20 @@ public class Controller1 {
    @Autowired
    Service1 service1;
 
+   @Autowired
+   Main main;
+
+   @Autowired
+   @Qualifier ("personBean1")
+   Person person1;
+
+   @Autowired
+   @Qualifier ("personBean2")
+   Person person2;
+   @Autowired
+   @Qualifier ("personBean3")
+   Person person3;
+
 
     //Method to set headers and body of a ResponseEntity object. Then return it;
 
@@ -47,8 +61,17 @@ public class Controller1 {
         service1.cityList.add(new City (name,nHab));
         return service1.returnCityList();
     }
-    @GetMapping (value = "/bean/{bean1}")
-    public void returnBean (@PathVariable Person p){
+    @GetMapping (value = {"/bean/{bean}"})
+    public Person returnBean (@PathVariable String bean){
+        switch (bean){
+            case "bean1" : return person1;
+            case "bean2" : return person2;
+            case "bean3" : return person3;
+            default:
+                return  new Person("Sin nombre","Sin ciudad", "Sin edad");
+
+        }
+
 
     }
 }
