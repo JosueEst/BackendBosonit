@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class Service1 {
 
-    Person person  = new Person();
+    private Person person  = new Person();
     City city = new City();
     List<City> cityList =  new ArrayList<>();
 

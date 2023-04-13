@@ -20,9 +20,9 @@ public class Controller2 {
     //GET method to change body's data from de Person object that is sent by addPerson()
     @GetMapping (value = "/getPersona")
     public Person getPersona (){
-        service1.person.setAge(String.valueOf(Integer.parseInt(service1.person.getAge())*2));
+        service1.getPerson().setAge(String.valueOf(Integer.parseInt(service1.getPerson().getAge())*2));
 
-        return service1.person;
+        return service1.getPerson();
     }
     @GetMapping (value = "/getCiudades")
     public List<City> getCiudades (){

@@ -46,11 +46,11 @@ public class Controller1 {
         headers.add("location",params.get("location"));
         headers.add("location",params.get("age"));
 
-        service1.person.setName(params.get("name"));
-        service1.person.setLocation(params.get("location"));
-        service1.person.setAge(params.get("age"));
+        service1.getPerson().setName(params.get("name"));
+        service1.getPerson().setLocation(params.get("location"));
+        service1.getPerson().setAge(params.get("age"));
 
-        return new ResponseEntity<>(service1.person, headers, HttpStatus.OK);
+        return new ResponseEntity<>(service1.getPerson(), headers, HttpStatus.OK);
     }
 
     //Method to add a City object type to a City's list
@@ -61,17 +61,15 @@ public class Controller1 {
         service1.cityList.add(new City (name,nHab));
         return service1.returnCityList();
     }
-    @GetMapping (value = {"/bean/{bean}"})
-    public Person returnBean (@PathVariable String bean){
+    @GetMapping (value = {"/bean","/bean/{bean}"})
+    public Person returnBean (@PathVariable (required = false) String bean){
         switch (bean){
             case "bean1" : return person1;
             case "bean2" : return person2;
             case "bean3" : return person3;
             default:
                 return  new Person("Sin nombre","Sin ciudad", "Sin edad");
-
         }
-
-
     }
+
 }

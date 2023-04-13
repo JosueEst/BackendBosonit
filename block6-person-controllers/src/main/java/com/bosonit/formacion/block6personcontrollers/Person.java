@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Person {
-    String name, location,age;
+    private String name, location,age;
 
 }
