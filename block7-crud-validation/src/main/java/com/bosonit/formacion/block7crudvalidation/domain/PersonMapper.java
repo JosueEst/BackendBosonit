@@ -16,4 +16,5 @@ public interface PersonMapper {
     Person personInputDtoToPerson  (PersonInputDto personOutputDto);
 
     PersonOutputDto personToPersonOutputDto (Person person);
+    PersonOutputDto updatePersonById (int id, PersonInputDto personInputDto);
 }

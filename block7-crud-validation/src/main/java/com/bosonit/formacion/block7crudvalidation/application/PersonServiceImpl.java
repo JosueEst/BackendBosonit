@@ -1,10 +1,12 @@
 package com.bosonit.formacion.block7crudvalidation.application;
 
+import com.bosonit.formacion.block7crudvalidation.Exceptions.UnprocessableEntityException;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.PersonInputDto;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.PersonOutputDto;
 import com.bosonit.formacion.block7crudvalidation.domain.Person;
 import com.bosonit.formacion.block7crudvalidation.domain.PersonMapper;
 import com.bosonit.formacion.block7crudvalidation.repository.PersonRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,16 +20,30 @@ public class PersonServiceImpl implements PersonService{
     PersonRepository personRepository;
 
     @Override
-    public PersonOutputDto addPerson (PersonInputDto personInputDto) throws Exception {
-
-        Person person = PersonMapper.INSTANCE.personInputDtoToPerson(validation(personInputDto));
+    public PersonOutputDto addPerson (PersonInputDto personInputDto) throws UnprocessableEntityException {
+        Person person = PersonMapper.INSTANCE.personInputDtoToPerson(personInputDto);
         return PersonMapper.INSTANCE.personToPersonOutputDto(personRepository.save(person));
     }
-    //TODO: probar este metodo y terminar el resto
+
     @Override
-    public PersonOutputDto getPersonById(int id) throws Exception {
+    public PersonOutputDto getPersonById(int id)  {
         //INSTANCE -> static property to access PersonMapper's methods
-             return PersonMapper.INSTANCE.personToPersonOutputDto(personRepository.findById(id).orElseThrow());
+        try{
+           return PersonMapper.INSTANCE.personToPersonOutputDto(personRepository.findById(id).orElseThrow(EntityNotFoundException::new));
+        }catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException();
+        }
+    }
+    @Override
+    public PersonOutputDto updatePersonById(int id, PersonInputDto personInputDto){
+        personInputDto.setId(id);
+        Person person = PersonMapper.INSTANCE.personInputDtoToPerson(personInputDto);
+        return PersonMapper.INSTANCE.personToPersonOutputDto(personRepository.save(person));
+    }
+    @Override
+    public void deletePersonById (int id){
+        personRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        personRepository.deleteById(id);
     }
 
     @Override
@@ -42,17 +58,17 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public PersonInputDto validation (PersonInputDto personInputDto) throws Exception {
-        if(personInputDto.getUsuario()==null) throw new Exception ("The username mustn't be null");
+    public PersonInputDto validation (PersonInputDto personInputDto) throws UnprocessableEntityException {
+        if(personInputDto.getUsuario()==null) throw new UnprocessableEntityException ("The username mustn't be null");
         else if (personInputDto.getUsuario().length() <6 || personInputDto.getUsuario().length() > 10)
-            throw new Exception("Username length must be between 6 and 10 characters");
-        else if (personInputDto.getPassword() == null) throw new Exception ("The password mustn't be null");
-        else if (personInputDto.getName() == null) throw new Exception("The name mustn't be null");
-        else if (personInputDto.getCompanyEmail() == null) throw new Exception("Company email mustn't be null");
-        else if (personInputDto.getPersonalEmail() == null) throw new Exception("Personal email mustn't be null");
-        else if (personInputDto.getCity() == null) throw new Exception("City mustn't be null");
-        else if (personInputDto.getActive() == null) throw new Exception("Property 'active' must be 'true' or 'false'");
-        else if (personInputDto.getCreatedDate() == null) throw new Exception("'CreatedDate' mustn't be null");
+            throw new UnprocessableEntityException("Username length must be between 6 and 10 characters");
+        else if (personInputDto.getPassword() == null) throw new UnprocessableEntityException ("The password mustn't be null");
+        else if (personInputDto.getName() == null) throw new UnprocessableEntityException("The name mustn't be null");
+        else if (personInputDto.getCompanyEmail() == null) throw new UnprocessableEntityException("Company email mustn't be null");
+        else if (personInputDto.getPersonalEmail() == null) throw new UnprocessableEntityException("Personal email mustn't be null");
+        else if (personInputDto.getCity() == null) throw new UnprocessableEntityException("City mustn't be null");
+        else if (personInputDto.getActive() == null) throw new UnprocessableEntityException("Property 'active' must be 'true' or 'false'");
+        else if (personInputDto.getCreatedDate() == null) throw new UnprocessableEntityException("'CreatedDate' mustn't be null");
         else log.info("Datos validados correctamente");
         return personInputDto;
     }

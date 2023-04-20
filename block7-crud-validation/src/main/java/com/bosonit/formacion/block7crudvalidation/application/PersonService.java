@@ -9,6 +9,11 @@ public interface PersonService {
     PersonOutputDto addPerson (PersonInputDto personInputDto) throws Exception;
 
     PersonOutputDto getPersonById (int id) throws Exception;
+
+    PersonOutputDto updatePersonById(int id, PersonInputDto personInputDto);
+
+    void deletePersonById(int id);
+
     PersonOutputDto getPersonByName (String name);
     List<PersonOutputDto> getAllPersons ();
     PersonInputDto validation (PersonInputDto personInputDto) throws Exception;
