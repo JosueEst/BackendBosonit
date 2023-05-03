@@ -1,10 +1,10 @@
 package com.bosonit.formacion.block7crudvalidation.domain;
 
-import com.bosonit.formacion.block7crudvalidation.controller.Dtos.PersonInputDto;
-import com.bosonit.formacion.block7crudvalidation.controller.Dtos.PersonOutputDto;
-import com.bosonit.formacion.block7crudvalidation.domain.Person;
+import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonFullProfessorOutputDto;
+import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonFullStudentOutputDto;
+import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonInputDto;
+import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonOutputDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -12,9 +12,10 @@ public interface PersonMapper {
 
     PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 
-    Person personOutputDtoToPerson  (PersonOutputDto personOutputDto);
     Person personInputDtoToPerson  (PersonInputDto personOutputDto);
 
     PersonOutputDto personToPersonOutputDto (Person person);
-    PersonOutputDto updatePersonById (int id, PersonInputDto personInputDto);
+    PersonFullStudentOutputDto personToPersonFullStudentOutputDto (Person person);
+    PersonFullProfessorOutputDto personToPersonFullProfessorOutputDto (Person person);
+
 }

@@ -1,10 +1,10 @@
 package com.bosonit.formacion.block7crudvalidation.controller;
 
 import com.bosonit.formacion.block7crudvalidation.Exceptions.UnprocessableEntityException;
-import com.bosonit.formacion.block7crudvalidation.application.PersonServiceImpl;
+import com.bosonit.formacion.block7crudvalidation.application.PersonService;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.CustomErrorOutputDto;
-import com.bosonit.formacion.block7crudvalidation.controller.Dtos.PersonInputDto;
-import com.bosonit.formacion.block7crudvalidation.controller.Dtos.PersonOutputDto;
+import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonInputDto;
+import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonOutputDto;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,30 +12,66 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping ("/person")
-public class Controller {
+public class PersonController {
     @Autowired
-    PersonServiceImpl personService;
+    PersonService personService;
 
+    //TODO: PROBAR TODOS LOS CRUD Y MIRAR LOS CASCADE
+
+    //Método para, en función de del parámetro pasado ('simple' -por defecto- o 'full') nos devolverá un objeto Persona (simple)
+    //o un objeto Persona con un join con la tabla Estudiantes/Profesores. Es decir, la info de Persona y además la de su rol.
     @GetMapping ("/{id}")
-    public ResponseEntity<PersonOutputDto> getPersonById (@PathVariable int id) throws EntityNotFoundException{
+    public ResponseEntity getPersonById
+            (@PathVariable int id, @RequestParam (defaultValue="simple") String outputType) throws EntityNotFoundException{
         try{
-            return ResponseEntity.ok().body(personService.getPersonById(id));
+
+            if(outputType.equals("full")){
+                return ResponseEntity.ok().body(personService.getPersonFull(id));
+
+            }else{
+                return ResponseEntity.ok().body(personService.getPersonById(id));
+            }
+
         }catch (EntityNotFoundException e){
-            throw  new EntityNotFoundException("404: Object with id '"+id+"' not found");
+            throw  new EntityNotFoundException("404: Person with id '"+id+"' not found");
         }
     }
+    //Mismo método pero buscando Persona por nombre
     @GetMapping ("/name")
-    public ResponseEntity<PersonOutputDto> getPersonByName (@RequestParam String name){
+    public ResponseEntity getPersonByName
+            (@RequestParam String name, @RequestParam (defaultValue = "simple") String outputType){
         try {
+            if(outputType.equals("full")){
+                return ResponseEntity.ok().body(personService.getPersonFull(name));
+            }
             return ResponseEntity.ok().body(personService.getPersonByName(name));
         }catch(Exception e){
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping
+    public ResponseEntity <List> getAllPersons (@RequestParam (defaultValue = "simple") String outputType){
+        try {
+            if(outputType.equals("full")){
+
+                List<Object> personList =new ArrayList<>();
+                for(PersonOutputDto personOutputDto : personService.getAllPersons()){
+                    personList.add(personService.getPersonFull(personOutputDto.getId_person()));
+                }
+                return ResponseEntity.ok().body(personList);
+            }
+            return ResponseEntity.ok().body(personService.getAllPersons());
+        }catch (EntityNotFoundException e){
+            throw new EntityNotFoundException("No existen personas en la base de datos");
+        }
+    }
+
     //Return an 'UnprocessEntityException' in case a field is not valid
     @PostMapping
     public ResponseEntity<PersonOutputDto> addPerson (@RequestBody PersonInputDto personInputDto)
@@ -58,6 +94,7 @@ public class Controller {
             throw new UnprocessableEntityException (e.getMessage());
         }
     }
+
     @DeleteMapping ("/{id}")
     public ResponseEntity <String>  deletePersonById (@PathVariable int id) throws EntityNotFoundException{
         try{
@@ -68,10 +105,7 @@ public class Controller {
         }
     }
 
-    @GetMapping
-    public Iterable<PersonOutputDto> getAllPersons (){
-        return personService.getAllPersons();
-    }
+
 
     //Method for catching 'EntityNotFoundException' exceptions
     @ExceptionHandler (EntityNotFoundException.class)
