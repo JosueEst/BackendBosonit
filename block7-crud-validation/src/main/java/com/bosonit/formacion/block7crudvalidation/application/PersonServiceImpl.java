@@ -1,6 +1,6 @@
 package com.bosonit.formacion.block7crudvalidation.application;
 
-import com.bosonit.formacion.block7crudvalidation.Exceptions.UnprocessableEntityException;
+import com.bosonit.formacion.block7crudvalidation.exceptions.UnprocessableEntityException;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonInputDto;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonOutputDto;
 import com.bosonit.formacion.block7crudvalidation.domain.Person;
@@ -8,8 +8,6 @@ import com.bosonit.formacion.block7crudvalidation.domain.PersonMapper;
 import com.bosonit.formacion.block7crudvalidation.domain.Professor;
 import com.bosonit.formacion.block7crudvalidation.domain.Student;
 import com.bosonit.formacion.block7crudvalidation.repository.PersonRepository;
-import com.bosonit.formacion.block7crudvalidation.repository.ProfessorRepository;
-import com.bosonit.formacion.block7crudvalidation.repository.StudentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +20,6 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
     @Autowired
     PersonRepository personRepository;
-    @Autowired
-    ProfessorRepository professorRepository;
-    @Autowired
-    StudentRepository studentRepository;
 
     @Override
     public PersonOutputDto addPerson(PersonInputDto personInputDto) throws UnprocessableEntityException {

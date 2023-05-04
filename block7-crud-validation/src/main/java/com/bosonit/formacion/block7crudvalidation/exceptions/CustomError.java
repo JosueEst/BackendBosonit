@@ -1,4 +1,4 @@
-package com.bosonit.formacion.block7crudvalidation.Exceptions;
+package com.bosonit.formacion.block7crudvalidation.exceptions;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

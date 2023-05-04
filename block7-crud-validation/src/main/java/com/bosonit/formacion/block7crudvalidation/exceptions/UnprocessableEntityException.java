@@ -1,6 +1,4 @@
-package com.bosonit.formacion.block7crudvalidation.Exceptions;
-
-import org.springframework.web.client.HttpClientErrorException;
+package com.bosonit.formacion.block7crudvalidation.exceptions;
 
 public class UnprocessableEntityException extends Exception{
 

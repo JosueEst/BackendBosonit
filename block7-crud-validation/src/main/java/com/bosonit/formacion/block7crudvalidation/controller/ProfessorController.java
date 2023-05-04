@@ -75,6 +75,15 @@ public class ProfessorController {
 
         return professorService.getAllProfessors(pageNumber, pageSize);
     }
+    //Method for catching 'EntityNotFoundException' exceptions
+    @ExceptionHandler (EntityNotFoundException.class)
+    public ResponseEntity<CustomErrorOutputDto> handleEntityNotFoundException (EntityNotFoundException e){
+        CustomErrorOutputDto customErrorOutputDto = new CustomErrorOutputDto();
+        customErrorOutputDto.setTimestamp(new Date());
+        customErrorOutputDto.setHttpCode(HttpStatus.NOT_FOUND.value());
+        customErrorOutputDto.setMessage(e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customErrorOutputDto);
+    }
     @ExceptionHandler (SQLIntegrityConstraintViolationException.class)
     public ResponseEntity<CustomErrorOutputDto> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException e){
         CustomErrorOutputDto customErrorOutputDto = new CustomErrorOutputDto();

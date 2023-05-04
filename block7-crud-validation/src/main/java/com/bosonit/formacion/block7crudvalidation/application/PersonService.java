@@ -1,12 +1,8 @@
 package com.bosonit.formacion.block7crudvalidation.application;
 
-import com.bosonit.formacion.block7crudvalidation.Exceptions.UnprocessableEntityException;
-import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonFullProfessorOutputDto;
-import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonFullStudentOutputDto;
+import com.bosonit.formacion.block7crudvalidation.exceptions.UnprocessableEntityException;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonInputDto;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonOutputDto;
-import com.bosonit.formacion.block7crudvalidation.domain.Person;
-import com.bosonit.formacion.block7crudvalidation.repository.PersonRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;

@@ -1,15 +1,19 @@
 package com.bosonit.formacion.block7crudvalidation.controller;
 
-import com.bosonit.formacion.block7crudvalidation.Exceptions.UnprocessableEntityException;
+import com.bosonit.formacion.block7crudvalidation.exceptions.UnprocessableEntityException;
 import com.bosonit.formacion.block7crudvalidation.application.PersonService;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.CustomErrorOutputDto;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonInputDto;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonOutputDto;
+import com.bosonit.formacion.block7crudvalidation.controller.Dtos.professor.ProfessorOutputDto;
+import com.bosonit.formacion.block7crudvalidation.feign.MyFeign;
+import feign.Feign;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -71,6 +75,19 @@ public class PersonController {
             throw new EntityNotFoundException("No existen personas en la base de datos");
         }
     }
+    //Endpoint para obtner un profesor por id usando RestTemplate
+    @GetMapping ("/profesor/{id}")
+    public ResponseEntity<ProfessorOutputDto> getProfessorTemp (@PathVariable int id){
+        ResponseEntity <ProfessorOutputDto> professorOutputDtoResponseEntity=
+                new RestTemplate().getForEntity("http://localhost:8081/professor/"+id, ProfessorOutputDto.class);
+        return professorOutputDtoResponseEntity;
+    }
+    //Usando FEIGN - no deja usar ResponseEntity
+    @GetMapping ("/profesor/feign/{id}")
+    public String getProfessor (@PathVariable int id){
+        MyFeign myFeign = Feign.builder().target(MyFeign.class, "http://localhost:8081/professor/"+id);
+        return myFeign.getProfessor();
+    }
 
     //Return an 'UnprocessEntityException' in case a field is not valid
     @PostMapping
@@ -104,7 +121,6 @@ public class PersonController {
             throw new EntityNotFoundException("404: Object with id '"+id+"' not found");
         }
     }
-
 
 
     //Method for catching 'EntityNotFoundException' exceptions
