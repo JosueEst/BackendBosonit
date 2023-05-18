@@ -1,0 +1,45 @@
+version: "3.2" #Version de Docker compose que estamos utilizando
+services: #Servicios, es decir, los contenedores que vamos a crear
+  mispringboot: #Nombre del contenedor
+    image: mispringbootimagen
+    container_name: mispringbootcontenedor
+    build: . #Indicamos que este contenedor se va a construrir a traves del Dockerfile
+    ports: #Vamos a indicar una lista de los puertos que vamos a mapear para el contenedor
+      - "8080:8080" #PuertoDelHost:PuertoDelContenedor
+    links: #Lista con los contenedores a los que el contenedor se va a conectar
+      - postgrestest #Este es el nombre del contenedor
+    depends_on:
+      - postgrestest
+    networks:
+      - mynetwork
+
+  postgrestest:  #Nombre del contenedor
+    container_name: postgrestest
+    image: postgres #Imagen desde la cual vamos a construir el contenedor
+    ports: #Lista de puertos que vamos a mapear del contenedor
+      - "5432:5432" #PuertoDelHost:PuertoDelContenedor
+    networks:
+      - mynetwork
+    environment: #Variables de entorno que hay que configurar en la maquina
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: contrasena
+      POSTGRES_DB: test
+    #  PGDATA: /src/main/resources/data.sql /var/lib/postgresql/data/pgdata # DATA DIRECTORY
+ # adminer:
+  #  image: adminer
+   # restart: always
+
+  dbeaver: #Nombre del contenedor
+    container_name: dbeaver
+    image: dbeaver/cloudbeaver
+    ports: #Vamos a indicar una lista de los puertos que vamos a mapear para el contenedor
+      - "8978:8978" #PuertoDelHost:PuertoDelContenedor
+    links: #Lista con los contenedores a los que el contenedor se va a conectar
+      - postgrestest
+    depends_on:
+      - postgrestest
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
+    driver: bridge

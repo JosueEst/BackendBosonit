@@ -1,0 +1,2 @@
+# Docker project with docker-compose.yml and a Dockerfile
+Project to create two containers and work from host with the spring boot container by port 8080, but without mapping ports between postgres container and host.
