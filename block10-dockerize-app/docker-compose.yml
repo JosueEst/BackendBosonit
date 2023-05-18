@@ -16,8 +16,8 @@ services: #Servicios, es decir, los contenedores que vamos a crear
   postgrestest:  #Nombre del contenedor
     container_name: postgrestest
     image: postgres #Imagen desde la cual vamos a construir el contenedor
-    ports: #Lista de puertos que vamos a mapear del contenedor
-      - "5432:5432" #PuertoDelHost:PuertoDelContenedor
+  #  ports: #Lista de puertos que vamos a mapear del contenedor
+  #   - "5432:5432" #PuertoDelHost:PuertoDelContenedor
     networks:
       - mynetwork
     environment: #Variables de entorno que hay que configurar en la maquina
