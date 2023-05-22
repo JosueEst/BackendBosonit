@@ -22,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping ("/person")
+@CrossOrigin (origins = "https://cdpn.io",methods= {RequestMethod.GET,RequestMethod.POST})
 public class PersonController {
     @Autowired
     PersonService personService;
@@ -59,7 +60,7 @@ public class PersonController {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping
+    @GetMapping ("/getall")
     public ResponseEntity <List> getAllPersons (@RequestParam (defaultValue = "simple") String outputType){
         try {
             if(outputType.equals("full")){
@@ -90,7 +91,8 @@ public class PersonController {
     }
 
     //Return an 'UnprocessEntityException' in case a field is not valid
-    @PostMapping
+    //@CrossOrigin(origins = "https://cdpn.io")//, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping ("/addPerson")
     public ResponseEntity<PersonOutputDto> addPerson (@RequestBody PersonInputDto personInputDto)
             throws UnprocessableEntityException {
         try{
