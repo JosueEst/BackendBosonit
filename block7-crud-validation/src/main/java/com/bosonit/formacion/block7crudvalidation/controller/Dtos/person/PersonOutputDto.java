@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -19,7 +20,7 @@ public class PersonOutputDto {
     private String personalEmail;
     private String city;
     private Boolean active;
-    private Date createdDate;
+    private LocalDate createdDate;
     private String imageUrl;
-    private Date terminationDate;
+    private LocalDate terminationDate;
 }

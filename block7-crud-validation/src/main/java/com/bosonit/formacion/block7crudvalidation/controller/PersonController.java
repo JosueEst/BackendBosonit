@@ -7,9 +7,11 @@ import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonI
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonOutputDto;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.professor.ProfessorOutputDto;
 import com.bosonit.formacion.block7crudvalidation.feign.MyFeign;
+import com.bosonit.formacion.block7crudvalidation.repository.Person.PersonRepository;
 import feign.Feign;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -26,6 +29,8 @@ import java.util.List;
 public class PersonController {
     @Autowired
     PersonService personService;
+    @Autowired
+    PersonRepository personRepository;
 
     //TODO: PROBAR TODOS LOS CRUD Y MIRAR LOS CASCADE
 
@@ -59,6 +64,26 @@ public class PersonController {
         }catch(Exception e){
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping ("/criteria")
+    public ResponseEntity<List<PersonOutputDto>> getPersonByCriteria (@RequestParam (value = "usuario",required = false) String usuario,
+            @RequestParam (required = false) String name, @RequestParam (required = false) String surname,
+            @RequestParam (value = "createdDate",required = false) @DateTimeFormat (pattern = "yyyy-MM-dd") Date createdDate,
+            @RequestParam (value = "dateCondition",required = false) String dateCondition,
+            @RequestParam (value = "order",required = false) String order,
+            @RequestParam (value = "orderCondition", required = false) String orderCondition)
+    {
+
+        HashMap <String, Object> conditions = new HashMap<>();
+        if(usuario !=null) conditions.put("usuario",usuario);
+        if(name !=null) conditions.put("name",name);
+        if(surname !=null) conditions.put("surname",surname);
+        if(createdDate !=null) conditions.put("createdDate",createdDate);
+        if(dateCondition !=null) conditions.put("dateCondition",dateCondition);
+        if(order !=null) conditions.put("order",order);
+        if(orderCondition !=null) conditions.put("orderCondition",orderCondition);
+
+        return ResponseEntity.ok().body(personRepository.getData(conditions));
     }
     @GetMapping ("/getall")
     public ResponseEntity <List> getAllPersons (@RequestParam (defaultValue = "simple") String outputType){

@@ -4,7 +4,10 @@ import com.bosonit.formacion.block7crudvalidation.exceptions.UnprocessableEntity
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonInputDto;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.person.PersonOutputDto;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.http.ResponseEntity;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public interface PersonService  {
@@ -18,8 +21,10 @@ public interface PersonService  {
     //Método para devolver un OutputDto de Persona + sus datos de estudiante o de profesor a partir del nombre de Persona
     Object getPersonFull(String name) throws EntityNotFoundException;
 
+
     //Método para devolver todas las persona
     List<PersonOutputDto> getAllPersons();
+
     PersonOutputDto addPerson (PersonInputDto personInputDto) throws UnprocessableEntityException;
 
     PersonOutputDto updatePersonById(int id, PersonInputDto personInputDto);

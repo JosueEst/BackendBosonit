@@ -6,7 +6,7 @@ import com.bosonit.formacion.block7crudvalidation.controller.Dtos.student.Studen
 import com.bosonit.formacion.block7crudvalidation.domain.Person;
 import com.bosonit.formacion.block7crudvalidation.domain.Professor;
 import com.bosonit.formacion.block7crudvalidation.domain.Student;
-import com.bosonit.formacion.block7crudvalidation.repository.PersonRepository;
+import com.bosonit.formacion.block7crudvalidation.repository.Person.PersonRepository;
 import com.bosonit.formacion.block7crudvalidation.repository.ProfessorRepository;
 import com.bosonit.formacion.block7crudvalidation.repository.StudentRepository;
 import jakarta.persistence.EntityNotFoundException;

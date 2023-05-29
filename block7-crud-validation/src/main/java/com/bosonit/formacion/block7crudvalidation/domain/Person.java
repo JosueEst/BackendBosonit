@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -37,11 +39,11 @@ public class Person {
     @Column (name="activo")
     private Boolean active;
     @Column (name="fecha_creacion")
-    private Date createdDate;
+    private LocalDate createdDate;
     @Column (name="imagen_url")
     private String imageUrl;
     @Column (name="fecha_terminacion")
-    private Date terminationDate;
+    private LocalDate terminationDate;
 
     @OneToOne (mappedBy = "person",cascade = CascadeType.REMOVE,orphanRemoval = true, fetch = FetchType.LAZY)
     private Professor professor;

@@ -5,7 +5,7 @@ import com.bosonit.formacion.block7crudvalidation.controller.Dtos.professor.Prof
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.professor.ProfessorOutputDto;
 import com.bosonit.formacion.block7crudvalidation.domain.Person;
 import com.bosonit.formacion.block7crudvalidation.domain.Professor;
-import com.bosonit.formacion.block7crudvalidation.repository.PersonRepository;
+import com.bosonit.formacion.block7crudvalidation.repository.Person.PersonRepository;
 import com.bosonit.formacion.block7crudvalidation.repository.ProfessorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

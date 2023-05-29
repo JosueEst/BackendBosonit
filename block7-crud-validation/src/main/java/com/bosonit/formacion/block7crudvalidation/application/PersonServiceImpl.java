@@ -7,12 +7,19 @@ import com.bosonit.formacion.block7crudvalidation.domain.Person;
 import com.bosonit.formacion.block7crudvalidation.domain.PersonMapper;
 import com.bosonit.formacion.block7crudvalidation.domain.Professor;
 import com.bosonit.formacion.block7crudvalidation.domain.Student;
-import com.bosonit.formacion.block7crudvalidation.repository.PersonRepository;
+import com.bosonit.formacion.block7crudvalidation.repository.Person.PersonRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -24,6 +31,8 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonOutputDto addPerson(PersonInputDto personInputDto) throws UnprocessableEntityException {
         Person person = PersonMapper.INSTANCE.personInputDtoToPerson(personInputDto);
+//        DateTimeFormatter dateTimeFormatter= DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//        person.setCreatedDate(LocalDate.parse(person.getCreatedDate().toString(), dateTimeFormatter));
         return PersonMapper.INSTANCE.personToPersonOutputDto(personRepository.save(person));
     }
 
