@@ -47,6 +47,13 @@ public class StudentController {
             throw  new EntityNotFoundException("404: Student with id '"+id+"' not found");
         }
     }
+    @GetMapping
+    public Iterable<StudentOutputDto> getAllStudents(
+            @RequestParam(defaultValue = "0", required = false) int pageNumber,
+            @RequestParam(defaultValue = "4", required = false) int pageSize) {
+
+        return studentService.getAllStudents(pageNumber, pageSize);
+    }
     //Method to update a student
     @PutMapping ("/{id}")
     public ResponseEntity <StudentOutputDto> updateStudentById (@PathVariable int id, @RequestBody StudentInputDto studentInputDto)
@@ -66,14 +73,6 @@ public class StudentController {
             throw new EntityNotFoundException("404: Student with id '"+id+"' not found");
         }
     }
-    @GetMapping
-    public Iterable<StudentOutputDto> getAllStudents(
-            @RequestParam(defaultValue = "0", required = false) int pageNumber,
-            @RequestParam(defaultValue = "4", required = false) int pageSize) {
-
-        return studentService.getAllStudents(pageNumber, pageSize);
-    }
-
 
     @ExceptionHandler (EntityNotFoundException.class)
     public ResponseEntity<CustomErrorOutputDto> handleEntityNotFoundException (EntityNotFoundException e){

@@ -1,5 +1,6 @@
 package com.bosonit.formacion.block7crudvalidation.controller;
 
+import com.bosonit.formacion.block7crudvalidation.exceptions.CustomError;
 import com.bosonit.formacion.block7crudvalidation.exceptions.UnprocessableEntityException;
 import com.bosonit.formacion.block7crudvalidation.application.PersonService;
 import com.bosonit.formacion.block7crudvalidation.controller.Dtos.CustomErrorOutputDto;
@@ -65,15 +66,19 @@ public class PersonController {
             return ResponseEntity.notFound().build();
         }
     }
+    //Method to find a person by any of the params given (not required);
+    //this method use an implementation of 'PersonRepository' (PersonRepositoryImpl)
     @GetMapping ("/criteria")
-    public ResponseEntity<List<PersonOutputDto>> getPersonByCriteria (@RequestParam (value = "usuario",required = false) String usuario,
+    public ResponseEntity <List<PersonOutputDto>> getPersonByCriteria (
+            @RequestParam (value = "usuario",required = false) String usuario,
             @RequestParam (required = false) String name, @RequestParam (required = false) String surname,
             @RequestParam (value = "createdDate",required = false) @DateTimeFormat (pattern = "yyyy-MM-dd") Date createdDate,
             @RequestParam (value = "dateCondition",required = false) String dateCondition,
             @RequestParam (value = "order",required = false) String order,
-            @RequestParam (value = "orderCondition", required = false) String orderCondition)
-    {
-
+            @RequestParam (value = "orderCondition", required = false) String orderCondition,
+            @RequestParam Integer pageNumber,
+            @RequestParam (defaultValue = "10", required = false) Integer pageSize
+    )throws CustomError{
         HashMap <String, Object> conditions = new HashMap<>();
         if(usuario !=null) conditions.put("usuario",usuario);
         if(name !=null) conditions.put("name",name);
@@ -82,6 +87,8 @@ public class PersonController {
         if(dateCondition !=null) conditions.put("dateCondition",dateCondition);
         if(order !=null) conditions.put("order",order);
         if(orderCondition !=null) conditions.put("orderCondition",orderCondition);
+        if (pageNumber != null) conditions.put("pageNumber", pageNumber);
+        if(pageSize != null) conditions.put("pageSize", pageSize);
 
         return ResponseEntity.ok().body(personRepository.getData(conditions));
     }

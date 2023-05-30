@@ -56,6 +56,13 @@ public class StudentServiceImpl implements StudentService {
     public StudentFullOutputDto getStudentByIdLikeNativeFull(int id) {
         return studentRepository.getStudentByIdLikeNativeFull(id).studentToStudentFullOutputDto();
     }
+    //// pageNumber = nº de página; cada página son 10 registros | pageSize = number of objects to retrieve
+    @Override
+    public List<StudentOutputDto> getAllStudents(int pageNumber, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+        //Same as --> .map(it -> PersonMapper.INSTANCE::personToPersonOutputDto(it))
+        return studentRepository.findAll(pageRequest).getContent().stream().map(Student::studentToStudentOutputDto).toList();
+    }
 
     @Override
     public StudentOutputDto updateStudentById(int id, StudentInputDto studentInputDto) {
@@ -73,11 +80,5 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.deleteById(id);
     }
 
-    //// pageNumber = nº de página; cada página son 10 registros | pageSize = number of objects to retrieve
-    @Override
-    public List<StudentOutputDto> getAllStudents(int pageNumber, int pageSize) {
-        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
-        //Same as --> .map(it -> PersonMapper.INSTANCE::personToPersonOutputDto(it))
-        return studentRepository.findAll(pageRequest).getContent().stream().map(Student::studentToStudentOutputDto).toList();
-    }
+
 }
