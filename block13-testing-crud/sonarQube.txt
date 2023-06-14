@@ -1,0 +1,8 @@
+Ejecutar en gitBash a nivel 'raíz' del proyecto (el token puede ser temporal):
+
+"C:\Program Files\Maven\apache-maven-3.9.2\bin\mvn"
+ clean verify sonar:sonar
+    -Dsonar.projectKey=block13
+    -Dsonar.projectName='block13'
+    -Dsonar.host.url=http://localhost:9000
+    -Dsonar.token=sqp_9a9467d17d53e43dbb6a62a50ecc098d8ac8d7df
