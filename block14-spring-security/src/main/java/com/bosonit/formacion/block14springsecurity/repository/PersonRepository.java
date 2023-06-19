@@ -1,0 +1,29 @@
+package com.bosonit.formacion.block14springsecurity.repository;
+
+import com.bosonit.formacion.block14springsecurity.domain.Person;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface PersonRepository extends JpaRepository<Person, Integer> {
+    Optional<Person> findByName(String name);
+    Optional<Person>findByUsuario (String usuario);
+    @Query(value = "SELECT * FROM (SELECT * FROM Personas P WHERE P.id_persona =?1) as P" +
+            " LEFT JOIN Estudiantes E ON P.id_persona = E.id_personaFK", nativeQuery = true)
+    Person getPersonFullStudent (int id);
+    @Query(value = "SELECT * FROM (SELECT * FROM Personas P WHERE P.id_persona =?1) as P" +
+            " LEFT JOIN Profesores PRO ON P.id_persona = PRO.id_personaFK", nativeQuery = true)
+    Person getPersonFullProfessor (int id);
+    @Query(value = "SELECT * FROM (SELECT * FROM Personas P WHERE P.nombre =?1) as P" +
+            " LEFT JOIN Estudiantes E ON P.id_persona = E.id_personaFK", nativeQuery = true)
+    Person getPersonFullStudent (String name);
+    @Query(value = "SELECT * FROM (SELECT * FROM Personas P WHERE P.nombre =?1) as P" +
+            " LEFT JOIN Profesores PRO ON P.id_persona = PRO.id_personaFK", nativeQuery = true)
+    Person getPersonFullProfessor (String name);
+    @Query(value = "SELECT * FROM Personas as P" +
+            " LEFT JOIN Profesores PRO ON P.id_persona = PRO.id_personaFK", nativeQuery = true)
+    List<Person> getAllPersonsFull ();
+
+}
