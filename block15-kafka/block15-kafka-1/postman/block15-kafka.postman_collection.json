@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "6968e1ba-e589-4cda-9abc-7829fc00e431",
+		"name": "block15-kafka",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26819987"
+	},
+	"item": [
+		{
+			"name": "saveCostumer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":2,\r\n    \"name\":\"Alba\",\r\n    \"email\": \"alba@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/producer"
+			},
+			"response": []
+		}
+	]
+}
