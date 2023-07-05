@@ -2,10 +2,13 @@ package com.bosonit.formacion.block1601appclienteviaje.passenger.controller.dto;
 
 import com.bosonit.formacion.block1601appclienteviaje.passenger.domain.Passenger;
 import com.bosonit.formacion.block1601appclienteviaje.trip.domain.Trip;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter
+@Setter
 public class PassengerOutputDto {
     int idPassenger;
 
@@ -18,7 +21,7 @@ public class PassengerOutputDto {
     String email;
 
     Long phoneNumber;
-    List<Trip> tripList = new ArrayList<>();
+    // List<Trip> tripList = new ArrayList<>();
 
     public PassengerOutputDto (Passenger passenger){
         this.idPassenger=passenger.getIdPassenger();
@@ -27,6 +30,6 @@ public class PassengerOutputDto {
         this.age = passenger.getAge();
         this.email = passenger.getEmail();
         this.phoneNumber = passenger.getPhoneNumber();
-        this.tripList = passenger.getTripList();
+        // this.tripList = passenger.getTripList();
     }
 }

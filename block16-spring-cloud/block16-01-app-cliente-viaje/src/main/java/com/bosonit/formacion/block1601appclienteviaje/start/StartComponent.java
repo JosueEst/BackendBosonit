@@ -39,20 +39,22 @@ public class StartComponent implements CommandLineRunner {
             passengerList.add(passenger);
         }
 
-
         Trip trip = new Trip();
         trip.setOrigin(ORIGIN + 1);
         trip.setDestination(DESTINATION + 2);
         trip.setDepartureDate("2023-10-10 20:00:00");
         trip.setArrivalDate("2023-10-25 07:30:00");
-        trip.getPassengerList().addAll(passengerList.subList(0, 2));
+        //en sublist no coge la primera posicion; 0 no es la primera posicion de cara a guardar datos
+        trip.getPassengerList().addAll(passengerList.subList(0,2));
+        tripRepository.save(trip);
 
         Trip trip2 = new Trip();
-        trip.setOrigin(ORIGIN + 2);
-        trip.setDestination(DESTINATION + 2);
-        trip.setDepartureDate("2023-10-10 20:00:00");
-        trip.setArrivalDate("2023-10-25 07:30:00");
-        trip.getPassengerList().addAll(passengerList.subList(3, 4));
+        trip2.setOrigin(ORIGIN + 2);
+        trip2.setDestination(DESTINATION + 2);
+        trip2.setDepartureDate("2023-10-10 20:00:00");
+        trip2.setArrivalDate("2023-10-25 07:30:00");
+        trip2.getPassengerList().addAll(passengerList.subList(2, 5));
+        tripRepository.save(trip2);
 
     }
 }

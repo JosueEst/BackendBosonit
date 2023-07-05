@@ -22,7 +22,7 @@ public class PassengerInputDto {
     String email;
 
     Long phoneNumber;
-    List<Trip> tripList = new ArrayList<>();
+
 
 
 }

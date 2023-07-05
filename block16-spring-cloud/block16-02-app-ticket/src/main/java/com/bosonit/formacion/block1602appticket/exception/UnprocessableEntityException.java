@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
 public class UnprocessableEntityException extends RuntimeException {
     public UnprocessableEntityException(String message) {
-        super("Los campos no cumplen con los requisitos establecidos. \n" + message);
+        super(message);
     }
 }

@@ -29,7 +29,7 @@ public class Trip {
     private String departureDate;
     @Column
     private String arrivalDate;
-    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany //(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Passenger> passengerList = new ArrayList<>();
     @Column
     private String status = "Disponible";

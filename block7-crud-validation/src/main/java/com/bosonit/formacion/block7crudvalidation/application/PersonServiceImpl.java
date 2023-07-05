@@ -30,7 +30,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonOutputDto addPerson(PersonInputDto personInputDto) throws UnprocessableEntityException {
-        Person person = PersonMapper.INSTANCE.personInputDtoToPerson(personInputDto);
+        Person person = PersonMapper.INSTANCE.personInputDtoToPerson(validation(personInputDto));
 //        DateTimeFormatter dateTimeFormatter= DateTimeFormatter.ofPattern("dd-MM-yyyy");
 //        person.setCreatedDate(LocalDate.parse(person.getCreatedDate().toString(), dateTimeFormatter));
         return PersonMapper.INSTANCE.personToPersonOutputDto(personRepository.save(person));

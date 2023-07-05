@@ -30,8 +30,6 @@ public class Passenger {
     private String email;
     @Column (name = "phoneNumber")
     private Long phoneNumber;
-    @ManyToMany (mappedBy = "passengerList")
-    private List<Trip> tripList = new ArrayList<>();
 
     public Passenger (PassengerInputDto passengerInputDto){
         this.name = passengerInputDto.getName();
@@ -39,7 +37,7 @@ public class Passenger {
         this.age = passengerInputDto.getAge();
         this.email = passengerInputDto.getEmail();
         this.phoneNumber = passengerInputDto.getPhoneNumber();
-        this.tripList = passengerInputDto.getTripList();
+
     }
 
 

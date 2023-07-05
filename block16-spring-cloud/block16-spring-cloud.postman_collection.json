@@ -1,0 +1,427 @@
+{
+	"info": {
+		"_postman_id": "de2b9278-1b00-4f3f-8351-737e716b9697",
+		"name": "block16-spring-cloud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26819987"
+	},
+	"item": [
+		{
+			"name": "gateway-api",
+			"item": [
+				{
+					"name": "generateTicket",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ticket/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ticket",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTicket",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ticket/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ticket",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Passenger",
+			"item": [
+				{
+					"name": "addPassenger",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Jose Luis\",\r\n    \"surname\":\"Perales\",\r\n    \"age\":60,\r\n    \"email\":\"per@gmail.com\",\r\n    \"phoneNumber\":654321987\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/passenger",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"passenger"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPassengerById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/passenger/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"passenger",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPassengerByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/passenger",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"passenger"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllPassengers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/passenger",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"passenger"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePassenger",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Jose Luis\",\r\n    \"surname\":\"Perales\",\r\n    \"age\":60,\r\n    \"email\":\"per@gmail.com\",\r\n    \"phoneNumber\":654321987\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/passenger?idPassenger=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"passenger"
+							],
+							"query": [
+								{
+									"key": "idPassenger",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePassenger",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/passenger/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"passenger",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trip",
+			"item": [
+				{
+					"name": "addTrip",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"origin\": \"Santander\",\r\n    \"destination\": \"Vigo\",\r\n    \"departureDate\":\"26-07-2023 14:00:00\",\r\n    \"arrivalDate\":\"26-07-2023 19:35:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trip",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTripById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/trip/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllTrips",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/trip",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTrip",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"origin\": \"Santander\",\r\n    \"destination\": \"A Coruña\",\r\n    \"departureDate\":\"26-07-2023 23:30:00\",\r\n    \"arrivalDate\":\"27-07-2023 19:35:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trip?idTrip=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip"
+							],
+							"query": [
+								{
+									"key": "idTrip",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTrip",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/trip/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "showStatusTrip",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/trip/status/show/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
+								"status",
+								"show",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addPassengerToTrip",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/trip/addPassenger?idTrip=1&idPassenger=6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
+								"addPassenger"
+							],
+							"query": [
+								{
+									"key": "idTrip",
+									"value": "1"
+								},
+								{
+									"key": "idPassenger",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countPassengersByTrip",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/trip/passenger/count/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
+								"passenger",
+								"count",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTripStatus",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/trip/status/2/suspendido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
+								"status",
+								"2",
+								"suspendido"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
